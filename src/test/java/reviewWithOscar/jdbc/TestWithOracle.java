@@ -115,7 +115,42 @@ public class TestWithOracle {
     }
 
     @Test
-    public void dynamicListOfMap(){
+    public void metaDataExample() throws SQLException {
+
+        DatabaseMetaData databaseMetaData = connection.getMetaData();
+
+        System.out.println("databaseMetaData.getDriverName() = " + databaseMetaData.getDriverName());
+        System.out.println("databaseMetaData.getDatabaseProductName() = " + databaseMetaData.getDatabaseProductName());
+        System.out.println("databaseMetaData.getDatabaseProductVersion() = " + databaseMetaData.getDatabaseProductVersion());
+
+        ResultSetMetaData rsMD = resultSet.getMetaData();
+
+        int columnCount = rsMD.getColumnCount();
+
+        String columnName = rsMD.getColumnName(1);
+
+        System.out.println("columnCount = " + columnCount);
+        System.out.println("columnName = " + columnName);
+
+    }
+
+    @Test
+    public void dynamicMap() throws SQLException {
+        ResultSetMetaData rsMD = resultSet.getMetaData();
+
+        List<Map<String, Object>> list = new ArrayList<>();
+
+        while(resultSet.next()){
+            Map<String, Object> rowMap = new HashMap<>();
+            for(int i=1; i<= rsMD.getColumnCount();i++){
+                rowMap.put(rsMD.getColumnName(i), resultSet.getObject(i));
+            }
+            list.add(rowMap);
+        }
+
+        for (Map<String, Object> row : list) {
+            System.out.println("row" + row);
+        }
 
 
     }
