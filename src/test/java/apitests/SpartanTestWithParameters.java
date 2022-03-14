@@ -6,7 +6,6 @@ import io.restassured.internal.mapping.JsonbMapper;
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
 import javafx.concurrent.Task;
-import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
