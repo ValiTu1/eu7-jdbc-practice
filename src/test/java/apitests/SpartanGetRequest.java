@@ -12,7 +12,7 @@ import static io.restassured.RestAssured.*;
 
 public class SpartanGetRequest {
 
-    String spartanUrl = "http://44.203.111.61:8000";
+    String spartanUrl = "http://44.201.154.37:8000";
 
     @Test
     public void test1() {

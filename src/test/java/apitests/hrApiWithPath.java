@@ -1,20 +1,12 @@
 package apitests;
 
-import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-import io.restassured.internal.mapping.JsonbMapper;
 import io.restassured.response.Response;
-import io.restassured.response.ValidatableResponse;
-import javafx.concurrent.Task;
-import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import utilities.ConfigurationReader;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static io.restassured.RestAssured.*;
 import static org.testng.Assert.*;
