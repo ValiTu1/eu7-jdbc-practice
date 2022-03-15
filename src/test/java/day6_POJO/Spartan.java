@@ -10,6 +10,17 @@ package day6_POJO;
     * */
     public class Spartan {
 
+        public Spartan(){
+
+        }
+
+        public Spartan(int id, String name, String gender, long phone) {
+            this.id = id;
+            this.name = name;
+            this.gender = gender;
+            this.phone = phone;
+        }
+
         private int id;
         private String name;
         private String gender;
@@ -46,5 +57,15 @@ package day6_POJO;
 
         public void setPhone(long phone) {
             this.phone = phone;
+        }
+
+        @Override
+        public String toString() {
+            return "Spartan{" +
+                    "id=" + id +
+                    ", name='" + name + '\'' +
+                    ", gender='" + gender + '\'' +
+                    ", phone=" + phone +
+                    '}';
         }
     }
