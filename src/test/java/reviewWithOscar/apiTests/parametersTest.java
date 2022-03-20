@@ -6,8 +6,10 @@ import static org.testng.Assert.*;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import org.testng.Assert;
+import static org.hamcrest.Matchers.*;
 import org.testng.annotations.Test;
+
+import java.util.Objects;
 
 public class parametersTest {
 
@@ -65,6 +67,43 @@ latitude is 38.8604
         assertEquals(jsonPath.getString("places[0].state"), "Virginia");
         assertEquals(jsonPath.getDouble("places[0].latitude"), 38.8604);
 
+
+    }
+
+    @Test
+    public void hamcrestMathcers(){
+        given().log().all().accept(ContentType.JSON)
+                .and().pathParams("zip", 22031)
+        .when().get(zipUrl+"/us/{zip}")
+        .then().log().all().assertThat().statusCode(200)
+                .and().assertThat().contentType("application/json")
+                .and().assertThat().header("Server", equalTo("cloudflare"))
+                .and().assertThat().header("Report-To", notNullValue())
+        .body("'post code'", equalTo("22031"),
+                        "country", equalTo("United States"),
+                        "'country abbreviation'", equalTo("US"),
+                        "places[0].'place name'", equalTo("Fairfax"),
+                        "places[0].state", equalTo("Virginia"),
+                        "places[0].latitude", equalTo("38.8604"));
+
+
+
+    }
+
+    /*Given Accept application/json
+    And path zipcode is 50000
+    When I send a GET request to /us endpoint
+    Then status code must be 404
+    And content type must be application/json*/
+
+    @Test
+    public void negativeScenario(){
+
+        given().accept(ContentType.JSON)
+                .and().pathParam("zip", "50000")
+                .when().get(zipUrl + "/us/{zip}")
+                .then().assertThat().statusCode(404)
+                .and().contentType("application/json");
 
     }
 }
